@@ -108,10 +108,12 @@ if __name__ == '__main__':
     total = 0
     for x in numbers:
         total += x
-    print(total)
     promedio = round(total / len(numbers), 6)
-    print(promedio)
 
-    resultado = (promedio - 0.5) * math.sqrt(100)
-    resultado = round(math.fabs(resultado / math.sqrt(1/12)), 6)
-    print(resultado)
+    chi = (promedio - 0.5) * math.sqrt(100)
+    chi = round(math.fabs(chi / math.sqrt(1/12)), 6)
+
+    if chi < 9.49:
+        print("Si son aleatorios")
+    else:
+        print("No son aleatorios")

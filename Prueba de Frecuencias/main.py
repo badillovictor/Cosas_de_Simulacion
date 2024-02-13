@@ -12,7 +12,10 @@ def sort(num):
 
 def calculateChi():
         chi = 0
+        i = 1
         for interval in conveniencia:
+            print('Intervalo {} tiene {} elementos'.format(i, len(interval)))
+            i += 1
             chi += (len(interval) - 20) ** 2
         chi /= 20
         return chi
