@@ -13,20 +13,21 @@ def getGridLocation(coordinates):
         x = 4
 
     if coordinates[1] < 0.2:
-        y = 0
+        y = 4
     elif coordinates[1] < 0.4:
-        y = 1
+        y = 3
     elif coordinates[1] < 0.6:
         y = 2
     elif coordinates[1] < 0.8:
-        y = 3
+        y = 1
     else:
-        y = 4
+        y = 0
 
     return x, y
 
 if __name__ == "__main__":
     n = 5
+    certainty = 36.4
     source = [
         0.78961,
         0.05230,
@@ -129,15 +130,20 @@ if __name__ == "__main__":
         0.44267,
         0.72102,
     ]
-    sourceGood = []
-    for index in range(5):
-        adjust = 0
-        for index2 in range(20):
-            sourceGood.append(source[index2 * 5 + adjust])
-        adjust += 1
+    pairNumber = len(source) - 1
     grid = [[0 for i in range(n)] for j in range(n)]
-    for index in range(len(sourceGood) - 1):
-        x, y = getGridLocation([sourceGood[index], sourceGood[index+1]])
-        grid[x][y] += 1
+    for index in range(pairNumber):
+        x, y = getGridLocation([source[index], source[index+1]])
+        grid[y][x] += 1
     for row in grid:
         print(row)
+    expectedFrequency = pairNumber / n**2
+    chi = 0
+    for row in grid:
+        for cuadrant in row:
+            chi += (expectedFrequency - cuadrant)**2 / expectedFrequency
+    print("Chi =", chi)
+    if chi < certainty:
+        print("{0} is smaller than {1}, therefore the numbers are random".format(chi, certainty))
+    else:
+        print("{0} is greater than {1}, therefore the numbers are not random")
