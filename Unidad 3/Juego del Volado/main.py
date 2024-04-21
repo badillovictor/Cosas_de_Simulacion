@@ -22,7 +22,6 @@ def apostar(cantidadActual, multiplicador):
 if __name__ == '__main__':
     cantidad = 30
     apuesta = 10
-    objetivo = 50
     loteria = 0
     quiebra = 0
 
@@ -32,6 +31,6 @@ if __name__ == '__main__':
         else:
             quiebra += 1
 
-    print('Ganadas: ' + loteria)
-    print('Perdidas: ' + quiebra)
-    print('Ratio: ' + )
+    print('Ganadas: ' + str(loteria))
+    print('Perdidas: ' + str(quiebra))
+    print('Ratio: ' + str(loteria / 10000))
