@@ -1,4 +1,3 @@
-
 if __name__ == '__main__':
     source = [
         0.78961,
@@ -103,9 +102,10 @@ if __name__ == '__main__':
         0.72102,
     ]
     numbers = sorted(source)
-    smirnov = [abs(i/len(numbers) - numbers[i]) for i in range(len(numbers))]
+    smirnov = [round(abs((i+1)/len(numbers) - numbers[i]), 5) for i in range(len(numbers))]
     certainty = 0.134
+    print(max(smirnov))
     if max(smirnov) < certainty:
-        print('The numbers are random')
+        print('The numbers are random, because they follow an uniform distribution, we can say this with a 95% certainty')
     else:
         print('The numbers are not random')
