@@ -25,7 +25,7 @@ if __name__ == '__main__':
     loteria = 0
     quiebra = 0
 
-    for i in range(0, 10000):
+    for i in range(0, 100000):
         if apostar(30, 1):
             loteria += 1
         else:
@@ -33,4 +33,4 @@ if __name__ == '__main__':
 
     print('Ganadas: ' + str(loteria))
     print('Perdidas: ' + str(quiebra))
-    print('Ratio: ' + str(loteria / 10000))
+    print('Ratio: ' + str(loteria / 100000))

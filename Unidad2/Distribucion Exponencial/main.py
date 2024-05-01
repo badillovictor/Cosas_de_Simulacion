@@ -2,8 +2,8 @@ import math
 import matplotlib.pyplot as plt
 
 
-def function(x):
-    return math.log(x) * -1
+def function(lda, x):
+    return (1/lda) * math.log(x) * -1
 
 
 if __name__ == '__main__':
@@ -18,7 +18,7 @@ if __name__ == '__main__':
                0.14151, 0.79269, 0.42989, 0.11537, 0.00121, 0.49962, 0.10850, 0.55743, 0.09264, 0.76262,
                0.03272, 0.35286, 0.94187, 0.19904, 0.33954, 0.15506, 0.75103, 0.63453, 0.22724, 0.72102]
 
-    x = [function(n) for n in numbers]
+    x = [function(1, n) for n in numbers]
     fig, ax = plt.subplots()
     ax.hist(x, color='darkorchid', rwidth=0.8)
     plt.show()
