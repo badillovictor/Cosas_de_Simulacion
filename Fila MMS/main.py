@@ -27,7 +27,7 @@ def poisson(mi):
 if __name__ == '__main__':
     # Declare all control variables
     timer = 0                   # Will control time
-    slots = 100                 # Number of slots people can go in
+    slots = 1                   # Number of slots people can go in
     slotsList = []              # Slots's list
     queue = []                  # People's list
     poissonAverage = 50         # Average people that will come per hout
