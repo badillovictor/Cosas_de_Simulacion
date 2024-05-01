@@ -51,23 +51,23 @@ if __name__ == '__main__':
             # Check each slot to see if it's empty
             for slot in slotsList:
                 # If it's empty put the first person in queue in there
-                if slot.persona is None and len(queue) > 0:
-                    slot.persona = queue.pop(0)
+                if slot.person is None and len(queue) > 0:
+                    slot.person = queue.pop(0)
                 # If not then advance the time of the person in there
-                elif slot.persona is not None:
-                    slot.persona.advanceTime()
+                elif slot.person is not None:
+                    slot.person.advanceTime()
                     # It the person finishes make them go away
-                    if slot.persona.time <= 0:
-                        slot.persona = None
+                    if slot.person.time <= 0:
+                        slot.person = None
                         # If the list has people left put them in the slot
                         if len(queue) > 0:
-                            slot.persona = queue.pop(0)
+                            slot.person = queue.pop(0)
             # Before changing hour, count how many people are in the queue
             if timer == 59:
                 peopleInQueue = len(queue)
                 # And how many people are in a slot
                 for slot in slotsList:
-                    if slot.persona is not None:
+                    if slot.person is not None:
                         peopleInQueue += 1
                 # Add the number of persons in that hour to a list
                 peoplePerHour.append(peopleInQueue)
