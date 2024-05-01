@@ -33,7 +33,7 @@ if __name__ == '__main__':
     poissonAverage = 50         # Average people that will come per hout
     exponencialLambda = 0.25    # Average % of an hour people will stay in a slot
     peoplePerHour = []          # People in the system per hour list
-    hoursSimulated = 10         # Hours simulated per N slots
+    hoursSimulated = 100        # Hours simulated per N slots
     currentBest = 2147483645    # Control variable to achieve the target 10 average people per hour
     # While we have not reached our target
     while currentBest > 10:
@@ -81,8 +81,9 @@ if __name__ == '__main__':
         print('Con {0} cajas, el promedio de personas en total es de {1}'.format(slots, roundedAverage))
         # See if we have improved towards our target
         currentBest = roundedAverage if roundedAverage < currentBest else currentBest
-        # Reset the queue and slot list
+        # Reset the queue, peoplePerHour and slot lists
         slotsList.clear()
+        peoplePerHour.clear()
         queue.clear()
         # Add another slot
         slots += 1
