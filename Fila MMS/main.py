@@ -1,10 +1,10 @@
-import sys
+import math
+import random
 
 import numpy as np
-import random
-import math
-import Persona, Caja
-import matplotlib.pyplot as plt
+
+import Person
+import Slot
 
 
 def exponencial_distribution(lbma):
@@ -30,7 +30,7 @@ if __name__ == '__main__':
     slots = 1                   # Number of slots people can go in
     slotsList = []              # Slots's list
     queue = []                  # People's list
-    poissonAverage = 50         # Average people that will come per hout
+    poissonAverage = 50         # Average people that will come per hour
     exponencialLambda = 0.25    # Average % of an hour people will stay in a slot
     peoplePerHour = []          # People in the system per hour list
     hoursSimulated = 100        # Hours simulated per N slots
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     while currentBest > 10:
         # Create a N slots list
         for i in range(slots):
-            slotsList.append(Caja.Caja())
+            slotsList.append(Slot.Slot())
         # Simulate per minute
         for i in range(hoursSimulated*60):
             # Set new batch of people at the start of each hour
@@ -47,27 +47,27 @@ if __name__ == '__main__':
                 # Get random number of people to add
                 for n in range(poisson(poissonAverage)):
                     # Add them one by one while getting them a random amount of time they'll spend in the queue
-                    queue.append(Persona.Persona(exponencial_distribution(exponencialLambda)))
+                    queue.append(Person.Person(exponencial_distribution(exponencialLambda)))
             # Check each slot to see if it's empty
-            for c in slotsList:
+            for slot in slotsList:
                 # If it's empty put the first person in queue in there
-                if c.persona is None and len(queue) > 0:
-                    c.persona = queue.pop(0)
+                if slot.persona is None and len(queue) > 0:
+                    slot.persona = queue.pop(0)
                 # If not then advance the time of the person in there
-                elif c.persona is not None:
-                    c.persona.advanceTime()
+                elif slot.persona is not None:
+                    slot.persona.advanceTime()
                     # It the person finishes make them go away
-                    if c.persona.tiempo <= 0:
-                        c.persona = None
+                    if slot.persona.time <= 0:
+                        slot.persona = None
                         # If the list has people left put them in the slot
                         if len(queue) > 0:
-                            c.persona = queue.pop(0)
+                            slot.persona = queue.pop(0)
             # Before changing hour, count how many people are in the queue
             if timer == 59:
                 peopleInQueue = len(queue)
                 # And how many people are in a slot
-                for c in slotsList:
-                    if c.persona is not None:
+                for slot in slotsList:
+                    if slot.persona is not None:
                         peopleInQueue += 1
                 # Add the number of persons in that hour to a list
                 peoplePerHour.append(peopleInQueue)
